@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e751cf03ee1177844a94f5666ee2ce4f, type: 3}
-  m_Name: Potato
+  m_Name: Log
   m_EditorClassIdentifier: 
-  ItemName: Default
-  MaxCount: -1
-  MaxPerStack: -1
+  ItemName: Log
+  Icon: {fileID: 21300000, guid: 96a91ae895a817849a82a170ca719b41, type: 3}
+  MaxCount: 10
+  MaxPerStack: 5

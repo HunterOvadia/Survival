@@ -21,8 +21,7 @@ public class ItemListItem
 [CreateAssetMenu(fileName = "Item", menuName = "Items/Item List")]
 public class ItemList : ScriptableObject
 {
-    [SerializeField]
-    private List<ItemListItem> Items = new List<ItemListItem>();
+    public List<ItemListItem> Items = new List<ItemListItem>();
 
     public void AddItem(BaseItemData newItem)
     {

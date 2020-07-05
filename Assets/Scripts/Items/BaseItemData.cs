@@ -8,6 +8,7 @@ using UnityEngine;
 public class BaseItemData : ScriptableObject
 {
     public string ItemName = "Default";
+    public Sprite Icon;
     public int MaxCount = -1;
     public int MaxPerStack = -1;
 }
