@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e751cf03ee1177844a94f5666ee2ce4f, type: 3}
   m_Name: Potato
   m_EditorClassIdentifier: 
-  ItemName: Potato
+  ItemName: Default
+  MaxCount: -1
+  MaxPerStack: -1

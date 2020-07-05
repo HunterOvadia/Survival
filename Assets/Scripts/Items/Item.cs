@@ -27,8 +27,8 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Destroy(gameObject);
-        PlayerInteractor.OnInteractableOverlap(this, true);
-        // TODO(Hunter): add to inventory
+        //Destroy(gameObject);
+        //PlayerInteractor.OnInteractableOverlap(this, true);
+        PlayerInventory.AddItem(ItemData);
     }
 }
