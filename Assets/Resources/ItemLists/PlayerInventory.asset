@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   Items:
-  - Data: {fileID: 11400000, guid: de5da0deb945dd3408fa45cc1448cb1a, type: 2}
-    Stacks: 2
+  - Data: {fileID: 11400000, guid: d7f971f4113cc34458b0ee197426354a, type: 2}
     Count: 10
   - Data: {fileID: 11400000, guid: d7f971f4113cc34458b0ee197426354a, type: 2}
-    Stacks: 1
-    Count: 21
+    Count: 4

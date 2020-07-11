@@ -13,12 +13,15 @@ public class PlayerScreenUI : MonoBehaviour
     [Header("UI Components")]
     public Slider HealthBar;
     public TextMeshProUGUI InteractionText;
+    public TextMeshProUGUI SystemAlertText;
 
     private void Start()
     {
         Vitals.GetVital(eVitalType.HEALTH).OnUpdate += OnHealthUpdate;
         PlayerInteractor.OnInteractableOverlap += OnInteractableOverlap;
+        GameManager.OnSystemMessageReceived += OnSystemMessageReceived;
 
+        SystemAlertText.gameObject.SetActive(false);
         InteractionText.gameObject.SetActive(false);
     }
 
@@ -40,5 +43,20 @@ public class PlayerScreenUI : MonoBehaviour
     {
         HealthBar.maxValue = maxAmount;
         HealthBar.value = newAmount;
+    }
+
+    private void OnSystemMessageReceived(string message)
+    {
+        SystemAlertText.text = message;
+        SystemAlertText.gameObject.SetActive(true);
+
+        StopCoroutine(ClearSystemAlert());
+        StartCoroutine(ClearSystemAlert());
+    }
+
+    private IEnumerator ClearSystemAlert()
+    {
+        yield return new WaitForSeconds(3.0f);
+        SystemAlertText.gameObject.SetActive(false);
     }
 }

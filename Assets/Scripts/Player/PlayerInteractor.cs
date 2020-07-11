@@ -18,18 +18,15 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if(other.TryGetComponent(out IInteractable interactable))
+        if(_currentInteractable != null)
         {
-            if(_currentInteractable != null && interactable.GetHashCode() == _currentInteractable.GetHashCode())
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    _currentInteractable.Interact();
-                }
+                _currentInteractable.Interact();
             }
-        }
+        }   
     }
 
     private void OnTriggerExit(Collider other)

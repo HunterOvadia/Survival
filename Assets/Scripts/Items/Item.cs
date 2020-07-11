@@ -2,12 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class Item : MonoBehaviour, IInteractable
 {
     public BaseItemData ItemData;
+
+    private SphereCollider _collider;
+
+    [SerializeField] private bool _persistAfterPickup;
+
     public void Awake()
     {
-        name = ItemData.ItemName;
+        if(ItemData == null)
+        {
+            Debug.LogError($"Item {name} in world has no ItemData attached to it.");
+            return;
+        }
+        name = "(Item): " + ItemData.ItemName;
+
+        _collider = GetComponent<SphereCollider>();
+        if(_collider != null)
+        {
+            _collider.isTrigger = true;
+        }
     }
 
     public GameObject GetGameObject()
@@ -27,8 +44,15 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        //Destroy(gameObject);
-        //PlayerInteractor.OnInteractableOverlap(this, true);
-        PlayerInventory.AddItem(ItemData);
+        if(PlayerInventory.AddItem(ItemData))
+        {
+            if (_persistAfterPickup)
+            {
+                return;
+            }
+
+            Destroy(gameObject);
+            PlayerInteractor.OnInteractableOverlap(this, true);
+        }
     }
 }

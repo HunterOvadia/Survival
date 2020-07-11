@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
 public class ItemListItem
 {
     public BaseItemData Data;
-    public int Stacks;
     public int Count;
 
     public ItemListItem(BaseItemData data)
     {
         Data = data;
-        Stacks = 1;
         Count = 1;
     }
 }
@@ -23,24 +22,38 @@ public class ItemList : ScriptableObject
 {
     public List<ItemListItem> Items = new List<ItemListItem>();
 
-    public void AddItem(BaseItemData newItem)
+    public bool AddItem(BaseItemData newItem)
     {
-        ItemListItem existingItem = Items.Find(item => item.Data.ItemName == newItem.ItemName);
-        if(existingItem == null)
+        ItemListItem lastExistingItem = Items.FindLast(item => item.Data.ItemName == newItem.ItemName);
+
+        // If this item does not exist, just add to our inventory
+        if(lastExistingItem == null)
         {
             Items.Add(new ItemListItem(newItem));
+            return true;
         }
         else
         {
-            if(existingItem.Count == newItem.MaxCount) return;
-            if(existingItem.Count < newItem.MaxCount || newItem.MaxCount == -1)
+            int countSum = Items.FindAll(item => item.Data.ItemName == newItem.ItemName).Select(x => x.Count).Sum();
+            if (countSum == newItem.MaxCount)
             {
-                ++existingItem.Count;
-                if(existingItem.Count % newItem.MaxPerStack == 1)
+                GameManager.SendSystemMessage($"You cannot pickup any more of this item.");
+                return false;
+            }
+
+            if(lastExistingItem.Count < newItem.MaxCount || newItem.MaxCount == -1)
+            {
+                if(lastExistingItem.Count == newItem.MaxPerStack)
                 {
-                    ++existingItem.Stacks;
+                    Items.Add(new ItemListItem(newItem));
+                }
+                else
+                {
+                    lastExistingItem.Count++;
                 }
             }
+
+            return true;
         }
     }
 

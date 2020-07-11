@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,7 +19,10 @@ public class PlayerInventoryUI : MonoBehaviour
     {
         _inventoryItemList = (ItemList)Resources.Load("ItemLists/PlayerInventory");
         _slots = SlotHolder.GetComponentsInChildren<PlayerInventorySlotUI>().ToList();
+
+        PlayerInventory.OnItemAdded += OnItemAdded;
     }
+
 
     private void Start()
     {
@@ -26,29 +30,25 @@ public class PlayerInventoryUI : MonoBehaviour
         RefreshItems();
     }
 
+    private void OnItemAdded(BaseItemData item)
+    {
+        RefreshItems();
+    }
+
     private void RefreshItems()
     {
-        int slotIndex = 0;
-        for(int i = 0; i < _inventoryItemList.Items.Count; ++i)
+        for (int i = 0; i < _slots.Count; i++)
         {
-            ItemListItem currentItem = _inventoryItemList.Items[i];
-            _slots[slotIndex].UpdateSlot(currentItem);
+            if(i < _inventoryItemList.Items.Count)
+            {
+                ItemListItem item = _inventoryItemList.Items[i];
+                _slots[i].UpdateSlot(item);
+            }
+            else
+            {
+                _slots[i].UpdateSlot(null);
+            }
         }
-        //int index = 0;
-        //for (int i = 0; i < _slots.Count; i++)
-        //{
-        //    if(i < _inventoryItemList.Items.Count)
-        //    {
-        //        for(int stacks = 0; stacks < _inventoryItemList.Items[i].Stacks; ++stacks)
-        //        {
-        //            _slots[i + stacks].UpdateItem(_inventoryItemList.Items[i]);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        _slots[i].UpdateItem(null);
-        //    }
-        //}
     }
 
     private void Update()
@@ -63,9 +63,5 @@ public class PlayerInventoryUI : MonoBehaviour
     {
         IsOpen = toggle;
         Panel.SetActive(IsOpen);
-        if(toggle)
-        {
-            RefreshItems();
-        }
     }
 }
