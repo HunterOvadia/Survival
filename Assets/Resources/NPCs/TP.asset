@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0265c240e5012944810e42885cef31d, type: 3}
-  m_Name: Trader Joe
+  m_Name: TP
   m_EditorClassIdentifier: 
-  NPCName: Trader Joe
+  NPCName: TP
   Flags: 5
+  Dialogue: {fileID: 11400000, guid: 6747b8ca0c2803843b999d8d9f74d935, type: 2}

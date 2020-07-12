@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975e1814c91f7ba488971f6d3601e8e4, type: 3}
+  m_Name: TPDialogue
+  m_EditorClassIdentifier: 
+  DialogueData:
+  - {fileID: 11400000, guid: 8599b984f92e2d54dbcebdfff2d35416, type: 2}
+  - {fileID: 11400000, guid: f7fee40ca06c8104eb41c6ffc912efae, type: 2}
+  - {fileID: 11400000, guid: 867ba53eb8d54fa469348a581b96e75c, type: 2}

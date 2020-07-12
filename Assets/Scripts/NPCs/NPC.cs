@@ -45,7 +45,9 @@ public class NPC : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        if(Data.Flags.IsSet(NPCFlags.FLAG_DIALOGUE))
+        {
+            DialogueManager.OnBeginDialogue?.Invoke(Data.Dialogue, GetName());
+        }
     }
-
 }

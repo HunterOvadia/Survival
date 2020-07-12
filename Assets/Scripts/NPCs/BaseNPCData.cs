@@ -9,4 +9,5 @@ public class BaseNPCData : ScriptableObject
 {
     public string NPCName = "Default";
     public NPCFlags Flags;
+    public Dialogue Dialogue;
 }
