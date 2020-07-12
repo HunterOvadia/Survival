@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : MonoBehaviour, IInteractable
 {
     public BaseItemData ItemData;
+    public bool IsInteractable = true;
 
     private SphereCollider _collider;
 
@@ -25,6 +26,11 @@ public class Item : MonoBehaviour, IInteractable
         {
             _collider.isTrigger = true;
         }
+    }
+
+    public bool CanInteract()
+    {
+        return IsInteractable;
     }
 
     public GameObject GetGameObject()

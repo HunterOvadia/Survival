@@ -13,6 +13,9 @@ public class PlayerInteractor : MonoBehaviour
     {
         if(other.TryGetComponent(out IInteractable interactable))
         {
+            if (!interactable.CanInteract())
+                return;
+
             OnInteractableOverlap?.Invoke(interactable, false);
             _currentInteractable = interactable;
         }

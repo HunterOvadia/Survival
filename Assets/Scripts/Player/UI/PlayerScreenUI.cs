@@ -29,8 +29,11 @@ public class PlayerScreenUI : MonoBehaviour
     {
         if(!exit)
         {
-            InteractionText.text = interactable.GetInteractableAction() + " '" + interactable.GetName() + "'";
-            InteractionText.gameObject.SetActive(true);
+            if(interactable.CanInteract())
+            {
+                InteractionText.text = interactable.GetInteractableAction() + " '" + interactable.GetName() + "'";
+                InteractionText.gameObject.SetActive(true);
+            }
         }
         else
         {

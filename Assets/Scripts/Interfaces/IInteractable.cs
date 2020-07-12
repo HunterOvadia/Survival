@@ -10,6 +10,6 @@ public interface IInteractable
     void Interact();
     string GetName();
     string GetInteractableAction();
-
+    bool CanInteract();
     GameObject GetGameObject();
 }

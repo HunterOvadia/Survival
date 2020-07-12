@@ -20,14 +20,19 @@ public class WorldInteractable : MonoBehaviour, IInteractable
     public string Name;
     public string Action;
     public eInteractableState State = eInteractableState.ON;
+    public bool IsInteractable = true;
 
     public OnInteractEvent OnInteractOn;
     public OnInteractEvent OnInteractOff;
 
+    public bool CanInteract()
+    {
+        return IsInteractable;
+    }
 
     public GameObject GetGameObject()
     {
-        return this.gameObject;
+        return gameObject;
     }
 
     public string GetInteractableAction()
