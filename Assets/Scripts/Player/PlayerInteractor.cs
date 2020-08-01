@@ -13,11 +13,11 @@ public class PlayerInteractor : MonoBehaviour
     {
         if(other.TryGetComponent(out IInteractable interactable))
         {
-            if (!interactable.CanInteract())
-                return;
-
-            OnInteractableOverlap?.Invoke(interactable, false);
-            _currentInteractable = interactable;
+            if (interactable.CanInteract())
+            {
+                OnInteractableOverlap?.Invoke(interactable, false);
+                _currentInteractable = interactable;
+            }
         }
     }
 
@@ -27,19 +27,25 @@ public class PlayerInteractor : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                _currentInteractable.Interact();
+                if(_currentInteractable.CanInteract())
+                {
+                    _currentInteractable.Interact();
+                }
             }
         }   
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.TryGetComponent(out IInteractable interactable))
+        if (other.TryGetComponent(out IInteractable interactable))
         {
             if(_currentInteractable != null && interactable.GetHashCode() == _currentInteractable.GetHashCode())
             {
-                OnInteractableOverlap?.Invoke(interactable, true);
-                _currentInteractable = null;
+                if (interactable.CanInteract())
+                {
+                    OnInteractableOverlap?.Invoke(interactable, true);
+                    _currentInteractable = null;
+                }
             }
         }
     }
